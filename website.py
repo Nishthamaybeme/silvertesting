@@ -16,36 +16,42 @@ cert_img = load_image("SHRI_RAM_JI_COMPUTERISED_TOUNCH 9_1.jpg")
 pic_img = load_image("1724258365130.jpg")
 
 # Apply CSS styling for a professional look
+
 st.markdown(f"""
     <style>
     body {{
         background-image: url(data:image/jpeg;base64,{logo_img});
-        background-repeat: repeat;
+        background-repeat: no-repeat;
         background-size: cover;
-        background-attachment: fixed; /* Ensures the background stays fixed */
-        background-position: center; /* Center the watermark */
+        background-attachment: fixed;
+        background-position: center;
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
     }}
     .container {{
         display: flex;
+        flex-wrap: wrap;
         margin: 20px;
     }}
     .main-content {{
         flex: 1;
         margin-left: 20px;
         padding: 20px;
-        overflow: auto;
+        min-width: 300px;
+        max-width: 70%;
+        box-sizing: border-box;
     }}
     .reviews {{
-        width: 16%;
+        flex-basis: 25%;
         background-color: #ffffff;
         border-left: 2px solid #ddd;
-        height: 100vh;
+        max-height: 100vh;
         overflow-y: scroll;
         padding: 10px;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        box-sizing: border-box;
     }}
     .reviews::-webkit-scrollbar {{
         width: 12px;
@@ -62,8 +68,6 @@ st.markdown(f"""
         color: #ffffff;
         padding: 10px;
         text-align: center;
-        position: fixed;
-        bottom: 0;
         width: 100%;
         box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     }}
@@ -85,6 +89,7 @@ st.markdown(f"""
     }}
     .logo img {{
         max-width: 200px;
+        height: auto;
     }}
     .certificate {{
         text-align: center;
@@ -92,7 +97,8 @@ st.markdown(f"""
         margin-bottom: 20px;
     }}
     .certificate img {{
-        max-width: 600px;
+        max-width: 100%;
+        height: auto;
     }}
     .pictures {{
         display: flex;
@@ -102,24 +108,30 @@ st.markdown(f"""
     }}
     .pictures img {{
         max-width: 300px;
-        margin: 10px;
+        height: auto;
     }}
-    /* Media Queries for Light and Dark Mode */
-    @media (prefers-color-scheme: light) {{
-        .reviews {{
-            background-color: #f9f9f9; /* Light background for light mode */
-            color: #333; /* Dark text for light mode */
+    /* Mobile-specific styles */
+    @media only screen and (max-width: 768px) {{
+        .container {{
+            flex-direction: column;
+            padding: 10px;
         }}
-    }}
-
-    @media (prefers-color-scheme: dark) {{
+        .main-content {{
+            margin-left: 0;
+            padding: 10px;
+            max-width: 100%;
+        }}
         .reviews {{
-            background-color: #2e2e2e; /* Dark background for dark mode */
-            color: #f9f9f9; /* Light text for dark mode */
+            flex-basis: 100%;
+            max-height: none;
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
         }}
     }}
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
+
 
 # Main content
 st.markdown(f"""
