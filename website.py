@@ -21,7 +21,7 @@ st.markdown(f"""
     <style>
     body {{
         background-image: url(data:image/jpeg;base64,{logo_img});
-        background-repeat: no-repeat;
+        background-repeat: repeat;
         background-size: cover;
         background-attachment: fixed;
         background-position: center;
@@ -31,27 +31,43 @@ st.markdown(f"""
     }}
     .container {{
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         margin: 20px;
     }}
-    .main-content {{
-        flex: 1;
-        margin-left: 20px;
-        padding: 20px;
-        min-width: 300px;
-        max-width: 70%;
-        box-sizing: border-box;
+    @media (min-width: 768px) {{
+        .container {{
+            flex-direction: row;
+        }}
+        .main-content {{
+            flex: 1;
+            margin-left: 20px;
+            padding: 20px;
+            overflow: auto;
+        }}
+        .reviews {{
+            width: 16%;
+            background-color: #ffffff;
+            border-left: 2px solid #ddd;
+            height: 100vh;
+            overflow-y: scroll;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }}
     }}
-    .reviews {{
-        flex-basis: 25%;
-        background-color: #ffffff;
-        border-left: 2px solid #ddd;
-        max-height: 100vh;
-        overflow-y: scroll;
-        padding: 10px;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-        box-sizing: border-box;
+    @media (max-width: 767px) {{
+        .reviews {{
+            width: 100%;
+            height: auto;
+            background-color: #ffffff;
+            padding: 10px;
+            border-left: none;
+            box-shadow: none;
+            margin-top: 20px;
+        }}
+        .main-content {{
+            flex: none;
+            padding: 10px;
+        }}
     }}
     .reviews::-webkit-scrollbar {{
         width: 12px;
@@ -89,7 +105,6 @@ st.markdown(f"""
     }}
     .logo img {{
         max-width: 200px;
-        height: auto;
     }}
     .certificate {{
         text-align: center;
@@ -97,8 +112,8 @@ st.markdown(f"""
         margin-bottom: 20px;
     }}
     .certificate img {{
-        max-width: 100%;
-        height: auto;
+        max-width: 600px;
+        width: 100%;
     }}
     .pictures {{
         display: flex;
@@ -108,29 +123,25 @@ st.markdown(f"""
     }}
     .pictures img {{
         max-width: 300px;
-        height: auto;
+        width: 100%;
+        margin: 10px;
     }}
-    /* Mobile-specific styles */
-    @media only screen and (max-width: 768px) {{
-        .container {{
-            flex-direction: column;
-            padding: 10px;
-        }}
-        .main-content {{
-            margin-left: 0;
-            padding: 10px;
-            max-width: 100%;
-        }}
+    /* Media Queries for Light and Dark Mode */
+    @media (prefers-color-scheme: light) {{
         .reviews {{
-            flex-basis: 100%;
-            max-height: none;
-            margin-top: 20px;
-            padding: 10px;
-            width: 100%;
+            background-color: #f9f9f9;
+            color: #333;
+        }}
+    }}
+    @media (prefers-color-scheme: dark) {{
+        .reviews {{
+            background-color: #2e2e2e;
+            color: #f9f9f9;
         }}
     }}
     </style>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+
 
 
 # Main content
@@ -190,3 +201,4 @@ Certified by BQM, our data is widely accepted by retailers, giving you peace of 
         <a class="button" href="https://maps.app.goo.gl/PGAGbwWHAEa6HE5k6">Get Directions</a>
     </div>
     """, unsafe_allow_html=True)
+
